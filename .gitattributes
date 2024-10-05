@@ -2,7 +2,7 @@ public class Container
 {
     private Obj[] elems;
     private int size;
-    private int initialCapacity =10;
+    private int static final initialCapacity =10;
 }
 
 public Container0()
@@ -44,5 +44,13 @@ private void resize()
 
 public void remove(int index)
 {
-    
+if(index <0 || index>=size)
+{
+    throw new indexOutBoundsException("Index: "+index+"Size: "+size);
+}
+for (int i=index; i<size-1; i++)
+{
+    elems[i]=elems[i+1];
+}
+elems[--size]=null;
 }
