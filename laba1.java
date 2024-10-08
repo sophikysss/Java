@@ -1,77 +1,55 @@
-public class Container
-{
-    private Obj[] elems;
-    private int size;
-    private int static final initialCapacity =10;
-}
+   package com.example;
 
-public Container0()
-{
-    elems=new Obj[initialCapacity];
-    size=0;
-}
+   import org.junit.jupiter.api.Test;
+   import static org.junit.jupiter.api.Assertions.*;
 
-public void add(Obj elem)
-{
-    if(size == elems.length)
-    {
-        resize();
-    }
-    elements[size++]=elem;
-}
+   public class ContainerTest {
 
-public Obj get(int index)
-{
- if(index<0||index>=size)
- {
-    throw new indexOutBoundsException("Index: "+index+"Size: "+size);
- }
- return elems[index];
-}
+       @Test
+       public void testAddAndGet() {
+           Container container = new Container();
+           container.add("Hello");
+           container.add(123);
+           
+           assertEquals(2, container.getSize());
+           assertEquals("Hello", container.get(0));
+           assertEquals(123, container.get(1));
+       }
 
-public int getSize()
-{
-    return size;
-}
+       @Test
+       public void testRemove() {
+           Container container = new Container();
+           container.add("Hello");
+           container.add(123);
+           container.add(45.67);
 
-private void resize()
-{
-    int newCapacity = elems.length*2;
-    Obj[] newElements=new Obj[newCapacity];
-    System.arraycopy(elems, 0,newElements, 0, elems.length);
-    elems=newElements;
-}
+           container.remove(1); // Удаляем элемент по индексу 1 (123)
 
-public void remove(int index)
-{
-if(index <0 || index>=size)
-{
-    throw new indexOutBoundsException("Index: "+index+"Size: "+size);
-}
-for (int i=index; i<size-1; i++)
-{
-    elems[i]=elems[i+1];
-}
-elems[--size]=null;
-}
+           assertEquals(2, container.getSize());
+           assertEquals("Hello", container.get(0));
+           assertEquals(45.67, container.get(1));
+       }
 
-public static void main(String[] args)
-{
-    Container conteiner = new Container();
-    container.add("cat");
-    container.add(2512);
-    container.add(5.1);
+       @Test
+       public void testGetOutOfBounds() {
+           Container container = new Container();
+           
+           Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
+               container.get(0);
+           });
+           
+           assertEquals("Index: 0, Size: 0", exception.getMessage());
+       }
 
-    System.out.println("Size: " + container.getSize());
+       @Test
+       public void testRemoveOutOfBounds() {
+           Container container = new Container();
 
-    System.out.println(container.get(0));
-    System.out.println(container.get(1));
-    container.remove(1);
+           Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
+               container.remove(0);
+           });
 
-    System.out.println("Size after remove: " + container.getSize());
-    System.out.println(container.get(1));
-
-
-
-}
-
+           assertEquals("Index: 0, Size: 0", exception.getMessage());
+       }
+   }
+   
