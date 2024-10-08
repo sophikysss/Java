@@ -63,4 +63,15 @@ public static void main(String[] args)
     container.add(5.1);
 
     System.out.println("Size: " + container.getSize());
+
+    System.out.println(container.get(0));
+    System.out.println(container.get(1));
+    container.remove(1);
+
+    System.out.println("Size after remove: " + container.getSize());
+    System.out.println(container.get(1));
+
+
+
 }
+
