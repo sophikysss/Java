@@ -1,30 +1,29 @@
 public class Container
 {
-    private Obj[] elems;
+    private Object[] elems;
     private int size;
-    private int static final initialCapacity =10;
-}
+    private static final int initialCapacity =10;
 
-public Container0()
+public Container()
 {
-    elems=new Obj[initialCapacity];
+    elems=new Object[initialCapacity];
     size=0;
 }
 
-public void add(Obj elem)
+public void add(Object elem)
 {
     if(size == elems.length)
     {
         resize();
     }
-    elements[size++]=elem;
+    elems[size++]=elem;
 }
 
-public Obj get(int index)
+public Object get(int index)
 {
  if(index<0||index>=size)
  {
-    throw new indexOutBoundsException("Index: "+index+"Size: "+size);
+    throw new IndexOutOfBoundsException("Index: "+index+"Size: "+size);
  }
  return elems[index];
 }
@@ -37,7 +36,7 @@ public int getSize()
 private void resize()
 {
     int newCapacity = elems.length*2;
-    Obj[] newElements=new Obj[newCapacity];
+    Object[] newElements=new Object[newCapacity];
     System.arraycopy(elems, 0,newElements, 0, elems.length);
     elems=newElements;
 }
@@ -46,7 +45,7 @@ public void remove(int index)
 {
 if(index <0 || index>=size)
 {
-    throw new indexOutBoundsException("Index: "+index+"Size: "+size);
+    throw new IndexOutOfBoundsException("Index: "+index+"Size: "+size);
 }
 for (int i=index; i<size-1; i++)
 {
@@ -57,7 +56,7 @@ elems[--size]=null;
 
 public static void main(String[] args)
 {
-    Container conteiner = new Container();
+    Container container = new Container();
     container.add("cat");
     container.add(2512);
     container.add(5.1);
@@ -70,6 +69,8 @@ public static void main(String[] args)
 
     System.out.println("Size after remove: " + container.getSize());
     System.out.println(container.get(1));
+}
+}
 
 
 
